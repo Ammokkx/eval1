@@ -14,7 +14,7 @@ public class LegoRepository : ILegoRepository
     public LegoTheme GetLegoTheme(string name)
     {
         LegoTheme data;
-        string SQL = "SELECT * FROM LegoTheme WHERE name like @voorwaarde";
+        string SQL = "SELECT id,name FROM LegoTheme WHERE name like @voorwaarde";
         using (SqlConnection conn = new SqlConnection(connectionString))
         using (SqlCommand cmd = conn.CreateCommand())
         {
