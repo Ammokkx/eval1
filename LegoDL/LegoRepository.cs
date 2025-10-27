@@ -36,7 +36,7 @@ public class LegoRepository : ILegoRepository
     public void WriteLegoThemes(List<LegoTheme> legoThemes)
     {
         string SQLthemes = "INSERT INTO LegoTheme(name) output INSERTED.ID VALUES (@naam)";
-        string SQLsets = "INSERT INTO LegoSet(id, name, year, pieces, minifigs, minage, imageURL, retailprice, themeId) output (@id, @name, @year, @pieces, @minifigs, @minage, @imageURL, @retailprice, @themeID)";
+        string SQLsets = "INSERT INTO LegoSet(id, name, year, pieces, minifigs, minage, imageURL, retailprice, themeId) output (@ids, @name, @year, @pieces, @minifigs, @minage, @imageURL, @retailprice, @themeID)";
 
         using (SqlConnection conn = new SqlConnection(connectionString))
         using (SqlCommand cmdThemes = conn.CreateCommand())
@@ -51,7 +51,7 @@ public class LegoRepository : ILegoRepository
 
             cmdThemes.Parameters.Add(new SqlParameter("@name", SqlDbType.NVarChar));
 
-            cmdSets.Parameters.Add(new SqlParameter("@id", SqlDbType.NVarChar));
+            cmdSets.Parameters.Add(new SqlParameter("@ids", SqlDbType.NVarChar));
             cmdSets.Parameters.Add(new SqlParameter("@name", SqlDbType.NVarChar));
             cmdSets.Parameters.Add(new SqlParameter("@year", SqlDbType.Int));
             cmdSets.Parameters.Add(new SqlParameter("@pieces", SqlDbType.Int));
@@ -73,7 +73,7 @@ public class LegoRepository : ILegoRepository
 
                     foreach (LegoSet var2 in var.LegoSets)
                     {
-                        cmdSets.Parameters["@id"].Value = var2.Id;
+                        cmdSets.Parameters["@ids"].Value = var2.Id;
                         cmdSets.Parameters["@name"].Value = var2.Name;
                         cmdSets.Parameters["@year"].Value = var2.Year;
                         cmdSets.Parameters["@pieces"].Value = var2.Pieces;
