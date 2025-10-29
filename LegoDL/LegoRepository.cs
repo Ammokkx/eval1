@@ -13,8 +13,6 @@ public class LegoRepository : ILegoRepository
 
     public LegoTheme GetLegoTheme(string name)
     {
-        /* een beetje commentaar voor branch ABC */
-        // nog meer stuff
         LegoTheme data;
         string SQL = "SELECT * FROM LegoTheme WHERE name like @voorwaarde";
         using (SqlConnection conn = new SqlConnection(connectionString))
